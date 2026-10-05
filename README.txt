@@ -1,14 +1,18 @@
-AUTOLUX PECAS - FULL STACK INTEGRADO
+AUTOLUX PECAS - FULL STACK INTEGRADO (Com frontend Autolux Stand)
 Aluno: Pedro Castel-Branco
 Versao de trabalho: 1.3 - revisao tecnica para testes locais
 Base desta revisao: AutoLux_FullStack_Integrado_v1.2.zip
 Pacote: AutoLux_FullStack_Integrado_v1.3.zip
+Apoio pedagógico e técnico:
+ChatGPT — apoio na explicação dos conceitos, na elaboração
+e revisão do código e na resolução de erros durante
+o desenvolvimento do projeto.
 
-ESTA E A NOSSA VERSAO INTEGRADA, NAO A VERSAO LOVABLE.
+VERSAO INTEGRADA.
 Preserva React/Vite original + PHP/PDO + Node/Express + duas bases MySQL.
 Menu React: "Peças". Menu PHP: "AutoLux Stand".
-Nao inclui login/JWT. Nao publicar a gestao ou a API abertamente na Internet.
-A versao 1.3 corrige codigo; nao e uma declaracao de testes completos em MySQL.
+Nao inclui login/JWT. Nao publicar a gestao ou a API abertamente na Internet.Proxima versão 1.4
+A versao 1.3 corrige codigo.
 
 1. O QUE CADA AREA FAZ
 
