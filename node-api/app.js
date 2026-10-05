@@ -1,0 +1,13 @@
+const express = require('express');
+const supplierRoutes = require('./routes/supplierRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const errorMiddleware = require('./middleware/errorMiddleware');
+const app = express();
+app.disable('x-powered-by');
+app.use(express.json({ limit: '100kb' }));
+app.get('/api', (req, res) => res.json({ success: true, message: 'AutoLux Suppliers API online.' }));
+app.use('/api/suppliers', supplierRoutes);
+app.use('/api/orders', orderRoutes);
+app.use((req, res) => res.status(404).json({ success: false, message: 'Rota nao encontrada.' }));
+app.use(errorMiddleware);
+module.exports = app;

@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+node-api/.env
+frontend/.env
+frontend/dist/
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+
+# Local/temp
+*.log
+
+# Configuracao local e dados de sessao
+php-app/config/config.local.php
+*.local
+
+# Ignorar outras variantes locais de dotenv, preservando os modelos
+.env
+.env.*
+!.env.example
+
+# Copias de seguranca anteriores a atualizacao das dependencias
+*.antes-audit

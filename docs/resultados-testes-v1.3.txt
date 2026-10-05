@@ -1,0 +1,434 @@
+RESULTADOS DA REVISAO 1.3
+Os testes com PDO/MySQL utilizam duplos. Nao sao SQL real.
+
+
+=== php-tests.txt ===
+OK 1 - getAll sem filtros nao gera avisos
+OK 2 - preco zero nao e descartado
+OK 3 - marca e parametro, nao SQL concatenado
+OK 4 - minimo superior ao maximo
+OK 5 - marca array
+OK 6 - preco nao numerico
+OK 7 - 49.90 vezes 2 exato
+OK 8 - 0.10 vezes 3 exato
+OK 9 - limite DECIMAL
+OK 10 - virgula decimal
+OK 11 - preco invalido "abc"
+OK 12 - preco invalido ""
+OK 13 - preco invalido null
+OK 14 - preco invalido []
+OK 15 - preco invalido true
+OK 16 - preco invalido -1
+OK 17 - preco invalido "1.234"
+OK 18 - preco invalido "999999999.00"
+OK 19 - overflow do total
+OK 20 - quantidade invalida "abc"
+OK 21 - quantidade invalida "1.5"
+OK 22 - quantidade invalida 1.5
+OK 23 - quantidade invalida 0
+OK 24 - quantidade invalida -1
+OK 25 - quantidade invalida null
+OK 26 - quantidade invalida true
+OK 27 - quantidade invalida []
+OK 28 - inteiro enviado pelo formulario
+OK 29 - escape de HTML
+OK 30 - devolve id da venda
+OK 31 - venda valida faz commit
+OK 32 - total SQL e decimal exato
+OK 33 - pagamento inativo
+OK 34 - pagamento inativo reverte
+OK 35 - stock insuficiente
+OK 36 - stock insuficiente reverte
+OK 37 - cliente inexistente
+OK 38 - propaga erro apos falha do item
+OK 39 - falha do item provoca rollback
+OK 40 - token CSRF correspondente
+OK 41 - token CSRF errado
+OK 42 - token CSRF array
+OK 43 - config preserva palavra-passe vazia
+
+43 verificacoes PHP passaram (sem MySQL real).
+
+=== node-tests.txt ===
+TAP version 13
+# Subtest: POST invalido nao chega ao repository
+ok 1 - POST invalido nao chega ao repository
+  ---
+  duration_ms: 1.53136
+  type: 'test'
+  ...
+# Subtest: POST valido devolve 201
+ok 2 - POST valido devolve 201
+  ---
+  duration_ms: 0.848833
+  type: 'test'
+  ...
+# Subtest: GET identificador invalido devolve erro 400
+ok 3 - GET identificador invalido devolve erro 400
+  ---
+  duration_ms: 0.212044
+  type: 'test'
+  ...
+# Subtest: GET inexistente devolve 404
+ok 4 - GET inexistente devolve 404
+  ---
+  duration_ms: 0.322387
+  type: 'test'
+  ...
+# Subtest: middleware {"type":"entity.parse.failed"}
+ok 5 - middleware {"type":"entity.parse.failed"}
+  ---
+  duration_ms: 0.316767
+  type: 'test'
+  ...
+# Subtest: middleware {"type":"entity.too.large"}
+ok 6 - middleware {"type":"entity.too.large"}
+  ---
+  duration_ms: 0.087221
+  type: 'test'
+  ...
+# Subtest: middleware {"code":"ER_DUP_ENTRY"}
+ok 7 - middleware {"code":"ER_DUP_ENTRY"}
+  ---
+  duration_ms: 0.112791
+  type: 'test'
+  ...
+# Subtest: middleware {"code":"ER_ROW_IS_REFERENCED_2"}
+ok 8 - middleware {"code":"ER_ROW_IS_REFERENCED_2"}
+  ---
+  duration_ms: 0.059937
+  type: 'test'
+  ...
+# Subtest: middleware {"code":"ER_NO_REFERENCED_ROW_2"}
+ok 9 - middleware {"code":"ER_NO_REFERENCED_ROW_2"}
+  ---
+  duration_ms: 0.208828
+  type: 'test'
+  ...
+# Subtest: criacao le o resultado antes do commit e liberta a ligacao
+ok 10 - criacao le o resultado antes do commit e liberta a ligacao
+  ---
+  duration_ms: 2.005202
+  type: 'test'
+  ...
+# Subtest: erro ao criar item provoca rollback e release
+ok 11 - erro ao criar item provoca rollback e release
+  ---
+  duration_ms: 1.297522
+  type: 'test'
+  ...
+# Subtest: PUT com valores iguais nao devolve 404 por affectedRows zero
+ok 12 - PUT com valores iguais nao devolve 404 por affectedRows zero
+  ---
+  duration_ms: 0.575267
+  type: 'test'
+  ...
+# Subtest: PUT para id inexistente nao altera itens
+ok 13 - PUT para id inexistente nao altera itens
+  ---
+  duration_ms: 0.295807
+  type: 'test'
+  ...
+# Subtest: normaliza uma encomenda valida e calcula 99.80 exatamente
+ok 14 - normaliza uma encomenda valida e calcula 99.80 exatamente
+  ---
+  duration_ms: 9.804495
+  type: 'test'
+  ...
+# Subtest: preco zero e permitido
+ok 15 - preco zero e permitido
+  ---
+  duration_ms: 0.34697
+  type: 'test'
+  ...
+# Subtest: 0.10 vezes 3 resulta em 0.30
+ok 16 - 0.10 vezes 3 resulta em 0.30
+  ---
+  duration_ms: 0.172489
+  type: 'test'
+  ...
+# Subtest: aceita virgula decimal normalizando para ponto
+ok 17 - aceita virgula decimal normalizando para ponto
+  ---
+  duration_ms: 0.183
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade "abc"
+ok 18 - rejeita quantidade "abc"
+  ---
+  duration_ms: 1.547707
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade "1.5"
+ok 19 - rejeita quantidade "1.5"
+  ---
+  duration_ms: 0.182772
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade 1.5
+ok 20 - rejeita quantidade 1.5
+  ---
+  duration_ms: 0.473852
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade 0
+ok 21 - rejeita quantidade 0
+  ---
+  duration_ms: 0.220442
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade -1
+ok 22 - rejeita quantidade -1
+  ---
+  duration_ms: 0.546148
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade null
+ok 23 - rejeita quantidade null
+  ---
+  duration_ms: 0.700076
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade undefined
+ok 24 - rejeita quantidade undefined
+  ---
+  duration_ms: 0.338763
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade true
+ok 25 - rejeita quantidade true
+  ---
+  duration_ms: 0.193768
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade []
+ok 26 - rejeita quantidade []
+  ---
+  duration_ms: 0.549454
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade {}
+ok 27 - rejeita quantidade {}
+  ---
+  duration_ms: 0.136299
+  type: 'test'
+  ...
+# Subtest: rejeita quantidade "2147483648"
+ok 28 - rejeita quantidade "2147483648"
+  ---
+  duration_ms: 0.207403
+  type: 'test'
+  ...
+# Subtest: rejeita custo "abc"
+ok 29 - rejeita custo "abc"
+  ---
+  duration_ms: 0.190587
+  type: 'test'
+  ...
+# Subtest: rejeita custo ""
+ok 30 - rejeita custo ""
+  ---
+  duration_ms: 1.461679
+  type: 'test'
+  ...
+# Subtest: rejeita custo -1
+ok 31 - rejeita custo -1
+  ---
+  duration_ms: 0.191659
+  type: 'test'
+  ...
+# Subtest: rejeita custo "3.555"
+ok 32 - rejeita custo "3.555"
+  ---
+  duration_ms: 0.098051
+  type: 'test'
+  ...
+# Subtest: rejeita custo null
+ok 33 - rejeita custo null
+  ---
+  duration_ms: 0.105437
+  type: 'test'
+  ...
+# Subtest: rejeita custo undefined
+ok 34 - rejeita custo undefined
+  ---
+  duration_ms: 0.074303
+  type: 'test'
+  ...
+# Subtest: rejeita custo true
+ok 35 - rejeita custo true
+  ---
+  duration_ms: 0.067262
+  type: 'test'
+  ...
+# Subtest: rejeita custo []
+ok 36 - rejeita custo []
+  ---
+  duration_ms: 0.068658
+  type: 'test'
+  ...
+# Subtest: rejeita custo {}
+ok 37 - rejeita custo {}
+  ---
+  duration_ms: 0.065763
+  type: 'test'
+  ...
+# Subtest: rejeita custo "999999999.00"
+ok 38 - rejeita custo "999999999.00"
+  ---
+  duration_ms: 0.069502
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido undefined
+ok 39 - rejeita corpo invalido undefined
+  ---
+  duration_ms: 0.152256
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido null
+ok 40 - rejeita corpo invalido null
+  ---
+  duration_ms: 0.651895
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido []
+ok 41 - rejeita corpo invalido []
+  ---
+  duration_ms: 0.089834
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido "hello"
+ok 42 - rejeita corpo invalido "hello"
+  ---
+  duration_ms: 0.06607
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido {}
+ok 43 - rejeita corpo invalido {}
+  ---
+  duration_ms: 0.120267
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido {"supplier_id":1,"reference":"ENC-1","items":[]}
+ok 44 - rejeita corpo invalido {"supplier_id":1,"reference":"ENC-1","items":[]}
+  ---
+  duration_ms: 0.225971
+  type: 'test'
+  ...
+# Subtest: rejeita corpo invalido {"supplier_id":1,"reference":"ENC-1","items":[null]}
+ok 45 - rejeita corpo invalido {"supplier_id":1,"reference":"ENC-1","items":[null]}
+  ---
+  duration_ms: 0.076215
+  type: 'test'
+  ...
+# Subtest: rejeita estado desconhecido
+ok 46 - rejeita estado desconhecido
+  ---
+  duration_ms: 0.131889
+  type: 'test'
+  ...
+# Subtest: rejeita referencia vazia
+ok 47 - rejeita referencia vazia
+  ---
+  duration_ms: 0.3115
+  type: 'test'
+  ...
+# Subtest: rejeita referencia demasiado longa
+ok 48 - rejeita referencia demasiado longa
+  ---
+  duration_ms: 0.150107
+  type: 'test'
+  ...
+# Subtest: rejeita total acima de DECIMAL(10,2)
+ok 49 - rejeita total acima de DECIMAL(10,2)
+  ---
+  duration_ms: 0.2181
+  type: 'test'
+  ...
+# Subtest: limite exato de DECIMAL(10,2)
+ok 50 - limite exato de DECIMAL(10,2)
+  ---
+  duration_ms: 0.200936
+  type: 'test'
+  ...
+# Subtest: fornecedor valido
+ok 51 - fornecedor valido
+  ---
+  duration_ms: 1.454716
+  type: 'test'
+  ...
+# Subtest: email invalido
+ok 52 - email invalido
+  ---
+  duration_ms: 0.73656
+  type: 'test'
+  ...
+# Subtest: nome array
+ok 53 - nome array
+  ---
+  duration_ms: 0.122279
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 160.985417
+
+=== sintaxe.json ===
+{
+  "php": 21,
+  "node_js": 14,
+  "frontend_js_jsx": 18,
+  "css": 2,
+  "json": 3
+}
+
+=== http-smoke.json ===
+[
+  {
+    "page": "index.php",
+    "status": 200,
+    "expected": 200,
+    "result": "PASS",
+    "type": "render only; mysql/curl absent"
+  },
+  {
+    "page": "catalogo.php",
+    "status": 503,
+    "expected": 503,
+    "result": "PASS",
+    "type": "render only; mysql/curl absent"
+  },
+  {
+    "page": "venda.php",
+    "status": 503,
+    "expected": 503,
+    "result": "PASS",
+    "type": "render only; mysql/curl absent"
+  },
+  {
+    "page": "fornecedores.php",
+    "status": 503,
+    "expected": 503,
+    "result": "PASS",
+    "type": "render only; mysql/curl absent"
+  },
+  {
+    "page": "encomendas.php",
+    "status": 503,
+    "expected": 503,
+    "result": "PASS",
+    "type": "render only; mysql/curl absent"
+  }
+]
+=== diagnostico.txt ===
+[OK] PHP 8.1 ou superior
+[OK] PHP de 64 bits
+[FALTA] PDO MySQL
+[FALTA] cURL
+PHP executado: /usr/bin/php8.4
