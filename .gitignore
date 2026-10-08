@@ -25,3 +25,6 @@ php-app/config/config.local.php
 
 # Copias de seguranca anteriores a atualizacao das dependencias
 *.antes-audit
+
+# Bibliotecas PHP instaladas pelo Composer
+/php-app/vendor/
