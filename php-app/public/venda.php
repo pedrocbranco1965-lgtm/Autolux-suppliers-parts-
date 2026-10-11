@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../middleware/requireAuth.php';
 require_once __DIR__ . '/../services/formHelpers.php';
 startFormSession();
 $config = require __DIR__ . '/../config/config.php';

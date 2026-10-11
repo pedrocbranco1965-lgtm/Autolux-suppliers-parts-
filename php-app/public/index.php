@@ -1,8 +1,12 @@
 <?php
+
+require_once __DIR__ . '/../middleware/requireAuth.php';
+
 $pageTitle = 'AutoLux Parts - Gestao';
 require_once __DIR__ . '/../partials/header.php';
 require_once __DIR__ . '/../partials/navbar.php';
 ?>
+
 <main class="container">
     <section class="hero">
         <p class="eyebrow">AutoLux</p>
