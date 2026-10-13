@@ -7,7 +7,10 @@ $suppliers = [];
 $error = '';
 
 try {
-    $api = new SupplierApiService($config['supplier_api_url']);
+    $api = new SupplierApiService(
+    $config['supplier_api_url'],
+    $_COOKIE['autolux_access'] ?? ''
+);
     $response = $api->getSuppliers();
     if (!is_array($response['data'] ?? null)) {
         throw new RuntimeException('Lista de fornecedores invalida.');

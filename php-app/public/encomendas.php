@@ -15,7 +15,10 @@ $form = [
 $statuses = ['pendente', 'enviado', 'recebido', 'cancelado'];
 
 try {
-    $api = new SupplierApiService($config['supplier_api_url']);
+    $api = new SupplierApiService(
+    $config['supplier_api_url'],
+    $_COOKIE['autolux_access'] ?? ''
+);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         checkCsrf();
         $action = Input::text($_POST['action'] ?? '', 'Acao', 12);
@@ -76,7 +79,10 @@ try {
     http_response_code($exception instanceof InvalidArgumentException ? 422 : 503);
 }
 try {
-    $api = new SupplierApiService($config['supplier_api_url']);
+    $api = new SupplierApiService(
+    $config['supplier_api_url'],
+    $_COOKIE['autolux_access'] ?? ''
+);
     $supplierResponse = $api->getSuppliers();
     $orderResponse = $api->getOrders();
     if (!is_array($supplierResponse['data'] ?? null) || !is_array($orderResponse['data'] ?? null)) {
