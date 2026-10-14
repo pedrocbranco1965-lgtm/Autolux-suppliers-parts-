@@ -177,9 +177,9 @@ try {
     );
 
     fwrite(
-        STDOUT,
-        "O login e a emissao de JWT ainda nao estao implementados.\n"
-    );
+    STDOUT,
+    "Para entrar, abra a pagina login.php no navegador.\n"
+);
 
 } catch (PDOException $error) {
     fwrite(
