@@ -351,6 +351,41 @@ processar a consulta interna enquanto outra pagina aguarda a API. Nao
 substituir o Apache por um servidor PHP de um unico processo sem avaliar
 esta dependencia; falta de capacidade pode causar timeout.
 
+5.7.1 ATIVAR AS REGRAS DE PROTECAO DO APACHE
+
+O .htaccess desta revisao exige mod_rewrite ativo e autorizacao do Apache
+para aplicar as diretivas utilizadas. A existencia do ficheiro, por si so,
+nao garante que as regras sejam aplicadas.
+
+No MAMP de referencia, a linha seguinte estava comentada no ficheiro
+/Applications/MAMP/conf/apache/httpd.conf:
+
+  #LoadModule rewrite_module modules/mod_rewrite.so
+
+Foi ativada retirando apenas o # inicial:
+
+  LoadModule rewrite_module modules/mod_rewrite.so
+
+Numa instalacao onde seja necessario fazer esta alteracao:
+guardar primeiro uma copia da configuracao atual, verificar a sintaxe
+do Apache e reiniciar os servidores apenas depois de obter Syntax OK.
+Nao duplicar a linha e preservar a opcao -pass-header Authorization
+quando esta for necessaria na configuracao FastCGI.
+
+Se o modulo ja estiver ativo, nao repetir a alteracao.
+
+O .htaccess atualizado bloqueia o acesso HTTP direto a pastas internas,
+incluindo middleware e vendor, e aos ficheiros composer.json e
+composer.lock do PHP. A pasta php-app/public permanece disponivel,
+com a autenticacao das paginas protegidas tratada pelo codigo PHP.
+
+As regras de protecao nao ficam dentro de um bloco IfModule:
+mod_rewrite e um requisito desta instalacao, nao uma opcao a ignorar.
+
+A configuracao httpd.conf pertence ao MAMP e fica fora do repositorio.
+O .htaccess pertence ao projeto e deve acompanhar a entrega.
+
+
 5.8 PREPARAR O FRONTEND
 
 Num terminal de trabalho:
@@ -570,19 +605,22 @@ Nao implementado: rececao de encomendas com entrada automatica em stock,
 CRUD visual completo de clientes/pecas/fornecedores, selecao automatica da
 peca na encomenda, pagamentos reais ou envio real do contacto React.
 
-Antes da entrega, repetir o build e as suites no estado final, testar a
-instalacao noutro ambiente separado, validar rollback/concorrencia de vendas
-e dos contadores e verificar que ficheiros internos nao sao servidos pelo
-Apache. O teste sequencial dos contadores nao prova o comportamento sob
-pedidos simultaneos. Os testes GET de autenticacao nao cobrem todas as
-variacoes de todos os metodos HTTP.
+Na ronda final acompanhada, o aluno apresentou os seguintes resultados:
+  - 42 verificacoes PHP passaram, utilizando substitutos de teste do PDO,
+    sem uma ligacao ao MySQL real nessa suite.
+  - 53 testes Node passaram, sem falhas, cancelamentos ou testes ignorados.
+  - O build React terminou com sucesso: 39 modulos processados.
+  - Os pedidos ao script SQL, composer.json, composer.lock e ao ficheiro
+    vendor/composer/installed.json devolveram HTTP 403.
+  - A pagina login.php continuou acessivel, com HTTP 200.
 
-A .htaccess inclui restricoes a ficheiros/pastas e depende das permissoes
-AllowOverride do Apache. Nao presumir que basta existir: verificar os .env,
-SQL, configuracoes, dependencias e ferramentas internas. Em producao, servir
-apenas o diretorio publico adequado; nao expor a raiz completa do projeto.
-As chaves privadas devem continuar fora do document root e do repositorio.
-
+Estes resultados correspondem aos cenarios e caminhos testados.
+Continuam por confirmar a instalacao num ambiente separado e os testes
+especificos de concorrencia e rollback com MySQL real. Os testes
+sequenciais dos contadores nao demonstram o comportamento sob pedidos
+simultaneos. Os testes GET de autenticacao nao cobrem todas as variacoes
+de todos os metodos HTTP. Nao se trata de uma auditoria completa de
+seguranca nem de uma validacao para producao.
 
 9. GIT, DOCUMENTACAO E ENTREGA
 ============================

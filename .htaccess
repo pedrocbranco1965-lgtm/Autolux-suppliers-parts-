@@ -1,10 +1,23 @@
+# Nao apresentar listagens automaticas de pastas.
 Options -Indexes
+
+# Impedir acesso a ficheiros cujo nome comeca por ponto.
 <FilesMatch "^\.">
     Require all denied
 </FilesMatch>
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule (^|/)\. - [F,L]
-    RewriteRule ^(?:node-api|sql|docs|frontend|tests)(?:/|$) - [F,L,NC]
-    RewriteRule ^php-app/(?:config|classes|services|partials|tools)(?:/|$) - [F,L,NC]
-</IfModule>
+
+# Este projeto exige mod_rewrite ativo no Apache.
+RewriteEngine On
+
+# Impedir acesso a ficheiros e pastas ocultos, incluindo .env e .git.
+RewriteRule (^|/)\. - [F,L]
+
+# Estas pastas nao devem ser disponibilizadas pelo Apache.
+RewriteRule ^(?:node-api|sql|docs|frontend|tests)(?:/|$) - [F,L,NC]
+
+# Bloquear o acesso HTTP direto ao codigo e bibliotecas internos do PHP.
+RewriteRule ^php-app/(?:config|classes|services|partials|tools|middleware|vendor)(?:/|$) - [F,L,NC]
+
+# Bloquear o acesso HTTP aos ficheiros de dependencias PHP.
+RewriteRule ^php-app/composer\.(?:json|lock)(?:/|$) - [F,L,NC]
+
